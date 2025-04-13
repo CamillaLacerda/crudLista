@@ -6,18 +6,20 @@ public class Main {
         UserService userService = new UserService();
 
         int opcao;
+
         do {
-            System.out.println("\n1 - Adicionar");
+            System.out.println("\n--- MENU ---");
+            System.out.println("1 - Adicionar");
             System.out.println("2 - Listar");
             System.out.println("3 - Atualizar");
             System.out.println("4 - Remover");
+            System.out.println("5 - Buscar por ID");
             System.out.println("0 - Sair");
-            System.out.print("Escolha: ");
+            System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
-            sc.nextLine(); // limpar o buffer
 
             switch (opcao) {
-                case 1 -> {
+                case 1:
                     System.out.print("ID: ");
                     int id = sc.nextInt();
                     sc.nextLine();
@@ -26,27 +28,45 @@ public class Main {
                     System.out.print("Email: ");
                     String email = sc.nextLine();
                     userService.adicionar(new User(id, nome, email));
-                }
-                case 2 -> userService.listar();
-                case 3 -> {
+                    break;
+
+                case 2:
+                    userService.listar();
+                    break;
+
+                case 3:
                     System.out.print("ID para atualizar: ");
-                    int id = sc.nextInt();
+                    id = sc.nextInt();
                     sc.nextLine();
                     System.out.print("Novo nome: ");
-                    String nome = sc.nextLine();
+                    nome = sc.nextLine();
                     System.out.print("Novo email: ");
-                    String email = sc.nextLine();
+                    email = sc.nextLine();
                     userService.atualizar(id, nome, email);
-                }
-                case 4 -> {
+                    break;
+
+                case 4:
                     System.out.print("ID para remover: ");
-                    int id = sc.nextInt();
+                    id = sc.nextInt();
                     userService.remover(id);
-                }
-                case 0 -> System.out.println("Finalizando...");
-                default -> System.out.println("Opção inválida");
+                    break;
+
+                case 5:
+                    System.out.print("ID para buscar: ");
+                    id = sc.nextInt();
+                    userService.buscarPorId(id);
+                    break;
+
+                case 0:
+                    System.out.println("Finalizando...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
             }
 
         } while (opcao != 0);
+
+        sc.close();
     }
 }
